@@ -10,8 +10,8 @@ resource "aws_route_table" "route-table" {
 }
 
 resource "aws_route_table_association" "rt-associate" {
-  count = length(var.SUBNET_CIDR)
-  subnet_id      = element(var.SUBNET_CIDR, count.index)
+  count = length(aws_subnet.main.*.id)
+  subnet_id      = element(aws_subnet.main.*.id, count.index)
   route_table_id = aws_route_table.route-table.id
 }
 
